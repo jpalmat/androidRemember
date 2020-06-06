@@ -1,5 +1,6 @@
 package com.example.remember
 
+import android.content.Context
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -62,7 +63,19 @@ class MainActivity : AppCompatActivity(), TodoListener {
         }
     }
 
-    override fun todoFrag() {
-        Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
+    override fun todoFrag(text: String, isCheck: Boolean) {
+        Toast.makeText(getApplicationContext(),"Hello "+text ,Toast.LENGTH_SHORT).show();
+        val sharedPref = getSharedPreferences("myPref", Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.apply {
+            putString("name", text)
+            putBoolean("isCheck", isCheck)
+            apply()
+        }
+
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragment, SecondFragment())
+            commit()
+        }
     }
 }

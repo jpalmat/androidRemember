@@ -1,8 +1,10 @@
 package com.example.remember.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remember.R
 import com.example.remember.`interface`.TodoListener
@@ -29,7 +31,7 @@ class TodoAdapter(var todos: List<Todo>, var listenera: TodoListener): RecyclerV
         }
 
         holder.itemView.setOnClickListener {
-            listenera.todoFrag()
+            listenera.todoFrag(todos[position].tittle, todos[position].isChecked)
         }
     }
 

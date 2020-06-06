@@ -30,8 +30,8 @@ class FirstFragment : Fragment() {
         val listener = activity as TodoListener
 
         var todoList = mutableListOf(
-            Todo("hello", false),
-            Todo("bye", true)
+            Todo("Jimmy", false),
+            Todo("M", true)
         )
 
         val adapter = TodoAdapter(todoList, listener)
