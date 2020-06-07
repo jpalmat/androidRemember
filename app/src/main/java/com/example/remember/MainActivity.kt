@@ -1,6 +1,7 @@
 package com.example.remember
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -24,6 +25,11 @@ class MainActivity : AppCompatActivity(), TodoListener {
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.fragment, firstFragment)
             commit()
+        }
+
+        btnRegister.setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
 
         btnFragment1.setOnClickListener {

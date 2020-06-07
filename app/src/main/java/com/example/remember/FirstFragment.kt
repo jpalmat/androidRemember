@@ -40,7 +40,7 @@ class FirstFragment : Fragment() {
         val listener = activity as TodoListener
         val rootView = inflater.inflate(R.layout.fragment_first, container, false)
 
-        //retrofit
+        //retrofit https://www.youtube.com/watch?v=w4ep-Vwwhlk&list=PLzffTJx5aHaTooddd8mtk4VIVRMyJCxpH&index=1
         val retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.1.129:8081/")
             .addConverterFactory(GsonConverterFactory.create())
