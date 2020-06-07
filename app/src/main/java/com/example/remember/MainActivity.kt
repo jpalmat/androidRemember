@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity(), TodoListener {
     }
 
     override fun todoFrag(text: String, isCheck: Boolean) {
-        Toast.makeText(getApplicationContext(),"Hello "+text ,Toast.LENGTH_SHORT).show();
         val sharedPref = getSharedPreferences("myPref", Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.apply {

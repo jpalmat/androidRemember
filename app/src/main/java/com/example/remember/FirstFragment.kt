@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remember.`interface`.TodoListener
@@ -41,7 +42,7 @@ class FirstFragment : Fragment() {
 
         //retrofit
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://127.0.0.1:8081/")
+            .baseUrl("http://192.168.1.129:8081/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -65,12 +66,20 @@ class FirstFragment : Fragment() {
 
         })
 
+        rootView.btnAddTodo.setOnClickListener {
+            val customer = Customer(3, rootView.enewtodo.text.toString())
+            var call = apiInterface.saveCustomer(customer)
+            call.enqueue(object : Callback<Customer> {
+                override fun onFailure(call: Call<Customer>, t: Throwable) {
 
+                }
 
-//        var todoList = mutableListOf(
-//            Todo("Jimmy", false),
-//            Todo("M", true)
-//        )
+                override fun onResponse(call: Call<Customer>, response: Response<Customer>) {
+                    Toast.makeText(activity, response.code().toString(), Toast.LENGTH_LONG)
+                }
+
+            })
+        }
 
         return rootView
     }
