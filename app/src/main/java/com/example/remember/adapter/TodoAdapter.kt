@@ -8,9 +8,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.remember.R
 import com.example.remember.`interface`.TodoListener
+import com.example.remember.model.Customer
 import kotlinx.android.synthetic.main.item_todo.view.*
 
-class TodoAdapter(var todos: List<Todo>, var listenera: TodoListener): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+class TodoAdapter(var todos: List<Customer>, var listenera: TodoListener): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
     inner class TodoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
     }
@@ -26,12 +27,12 @@ class TodoAdapter(var todos: List<Todo>, var listenera: TodoListener): RecyclerV
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         holder.itemView.apply {
-            txtTodo.text = todos[position].tittle
-            chDone.isChecked = todos[position].isChecked
+            txtTodo.text = todos[position].name
+            chDone.isChecked = true
         }
 
         holder.itemView.setOnClickListener {
-            listenera.todoFrag(todos[position].tittle, todos[position].isChecked)
+            listenera.todoFrag(todos[position].name, true)
         }
     }
 
