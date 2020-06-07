@@ -27,11 +27,6 @@ class MainActivity : AppCompatActivity(), TodoListener {
             commit()
         }
 
-        btnRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
-
         btnFragment1.setOnClickListener {
             supportFragmentManager.beginTransaction().apply {
                 replace(R.id.fragment, firstFragment)

@@ -8,11 +8,6 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -24,51 +19,46 @@ class RegisterActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         auth = FirebaseAuth.getInstance()
 
-        btnLogin.setOnClickListener {
+        btnRegister.setOnClickListener {
             registerUser()
         }
 
+        btnLogin.setOnClickListener {
+            LoginUser()
+        }
     }
 
     private fun registerUser(){
         val email = etxtEmail.text.toString()
         val pass = etxtPassword.text.toString()//Pass01
         if(email.isNotEmpty() && pass.isNotEmpty()){
-//            CoroutineScope(Dispatchers.IO).launch {
-//                try {
-//                    auth.createUserWithEmailAndPassword(email, pass)
-//                    withContext(Dispatchers.Main){
-//                        checkLoggedInState()
-//                    }
-                    auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(this@RegisterActivity, "Successfully Registered", Toast.LENGTH_LONG)
-                                .show()
-                            val intent = Intent(this@RegisterActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        } else {
-                            Toast.makeText(this@RegisterActivity, "Registration Failed", Toast.LENGTH_LONG).show()
-                        }
-//                    } .addOnCompleteListener(this, OnCompleteListener{ task ->
-//                        if(task.isSuccessful){
-//                            Toast.makeText(this, "Successfully Registered", Toast.LENGTH_LONG).show()
-//                            val intent = Intent(this, MainActivity::class.java)
-//                            startActivity(intent)
-//                            finish()
-//                        }else {
-//                            Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
-//                        }
-//                    })
-//                    }
-//                } catch (e: Exception){
-//                    withContext(Dispatchers.Main) {
-//                        Toast.makeText(this@RegisterActivity, e.message, Toast.LENGTH_LONG)
-//                    }
-
+                auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(this@RegisterActivity, "Successfully Registered", Toast.LENGTH_LONG)
+                            .show()
+                        val intent = Intent(this@RegisterActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        Toast.makeText(this@RegisterActivity, "Registration Failed", Toast.LENGTH_LONG).show()
+                    }
                 }
-//            }
         }
+    }
+
+    private fun LoginUser(){
+        val email = etxtEmailLogin.text.toString()
+        val pass = etxtPasswordLogin.text.toString()//Pass01
+        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(this, OnCompleteListener { task ->
+            if(task.isSuccessful) {
+                Toast.makeText(this, "Successfully Logged In", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }else {
+                Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
     private fun checkLoggedInState(){
