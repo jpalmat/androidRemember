@@ -86,16 +86,22 @@ class MainActivity : AppCompatActivity(), TodoListener {
     }
 
     override fun todoFrag(text: String, isCheck: Boolean) {
-        val sharedPref = getSharedPreferences("myPref", Context.MODE_PRIVATE)
-        val editor = sharedPref.edit()
-        editor.apply {
-            putString("name", text)
-            putBoolean("isCheck", isCheck)
-            apply()
-        }
+//        val sharedPref = getSharedPreferences("myPref", Context.MODE_PRIVATE)
+//        val editor = sharedPref.edit()
+//        editor.apply {
+//            putString("name", text)
+//            putBoolean("isCheck", isCheck)
+//            apply()
+//        }
+
+        var fragmentSecond = SecondFragment()
+
+        var bundle = Bundle()
+        bundle.putString("name", text)
+        fragmentSecond.arguments = bundle
 
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment, SecondFragment())
+            replace(R.id.fragment, fragmentSecond)
             commit()
         }
     }

@@ -25,10 +25,14 @@ class SecondFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_second, container, false)
 
 
-        val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
-        if (sharedPref != null) {
-            rootView.secondFragment.text = sharedPref.getString("name", null)
+//        val sharedPref = activity?.getSharedPreferences("myPref", Context.MODE_PRIVATE)
+//        if (sharedPref != null) {
+        if(arguments != null){
+//            rootView.secondFragment.text = sharedPref.getString("name", null)
+            rootView.secondFragment.text = arguments!!.getString("name")
         }
+
+//        }
 
         return rootView
     }
